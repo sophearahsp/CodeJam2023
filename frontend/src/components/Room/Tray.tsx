@@ -73,13 +73,12 @@ const Tray = ({ leaveCall }: TrayProps) => {
     return (
         <Stack
             direction="row"
-            p={2}
+            p={4}
             sx={{
                 justifyContent: 'space-between'
             }}
         >
             <Paper sx={{
-                padding: '8px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

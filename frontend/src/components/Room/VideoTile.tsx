@@ -14,7 +14,7 @@ const VideoTile = ({ id, isScreenShare, isLocal, isAlone }: TileProps) => {
 
     return (
         <GridTile>
-            <DailyVideo automirror sessionId={id} type={isScreenShare ? 'screenVideo' : 'video'} style={{width: '100%'}} fit="cover"/>
+            <DailyVideo automirror sessionId={id} type={isScreenShare ? 'screenVideo' : 'video'} style={{width: '100%', borderRadius: '8px'}} fit="cover"/>
             <UsernameLabel id={id} isLocal={isLocal} />
         </GridTile>
     );

@@ -8,7 +8,7 @@ import {
   useDailyEvent,
 } from '@daily-co/daily-react';
 import { Box, TextField, Button, Stack } from "@mui/material";
-import Call from './Call';
+import Call from './Room/Call';
 import Tray from './Room/Tray';
 import Chat from './Room/Chat';
 

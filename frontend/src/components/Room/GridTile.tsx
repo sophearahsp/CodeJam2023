@@ -5,7 +5,13 @@ import React, {ReactNode} from 'react';
 
 const GridTile = (props: {children: ReactNode}) => {
     return (
-        <Grid item xs={8}>
+        <Grid
+            item
+            xs={8}
+            sx={{
+                height: '100%'
+            }}
+        >
             {props.children}
         </Grid>
     );

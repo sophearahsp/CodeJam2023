@@ -6,10 +6,10 @@ import {
   useDailyEvent,
   DailyAudio,
 } from '@daily-co/daily-react';
-import { Box, TextField, Grid, Button, Stack } from "@mui/material";
+import { Box, TextField, Typography, Grid, Button, Stack } from "@mui/material";
 
-import VideoTile from './Room/VideoTile';
-import GridTile from './Room/GridTile';
+import VideoTile from './VideoTile';
+import GridTile from './GridTile';
 
 //import UserMediaError from '../UserMediaError/UserMediaError';
 
@@ -39,19 +39,20 @@ export default function Call() {
 
     const renderCallScreen = () => (
         <Box
+            padding={4}
             sx={{
                 height: '100%',
-                width: '100%',
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center',
-                // padding: '16px'
+                alignItems: 'center'
             }}
         >
             <Grid container columns={16}
                 sx={{
                     justifyContent: 'center',
                     alignItems: 'center',
+                    width: '100%',
+                    height: remoteParticipantIds?.length > 0 ? '100%' : '50%',
                 }}
             >
                 {localParticipant && (
@@ -75,19 +76,27 @@ export default function Call() {
                 ) : (
                     <GridTile>
                         <Box
+                            padding={2}
                             sx={{
-                                backgroundColor: 'lightgray'
+                                height: '100%',
+                                backgroundColor: 'lightblue',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderRadius: '8px',
                             }}
                         >
+                            <Stack>
+                                <Typography sx={{fontWeight: 'bold'}}>
+                                    Waiting for others
+                                </Typography>
 
-                            <div className="info-box">
-                                <h1>Waiting for others</h1>
-                                <p>Invite someone by sharing this link:</p>
-                                <span className="room-url">{window.location.href}</span>
-                            </div>
+                                <Typography>
+                                    Invite someone by sharing this link: {window.location.href}
+                                </Typography>
+                            </Stack>
                         </Box>
                     </GridTile>
-                    
                 )}
             </Grid>
         </Box>
