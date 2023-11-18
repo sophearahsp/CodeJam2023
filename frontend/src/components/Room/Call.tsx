@@ -51,7 +51,6 @@ export default function Call() {
                 sx={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    width: '100%',
                     height: remoteParticipantIds?.length > 0 ? '100%' : '50%',
                 }}
             >

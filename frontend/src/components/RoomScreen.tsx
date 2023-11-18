@@ -7,7 +7,7 @@ import {
   useAudioTrack,
   useDailyEvent,
 } from '@daily-co/daily-react';
-import { Box, TextField, Button, Stack } from "@mui/material";
+import { Box, TextField, Button, Grid, Stack } from "@mui/material";
 import Call from './Room/Call';
 import Tray from './Room/Tray';
 import Chat from './Room/Chat';
@@ -28,23 +28,24 @@ const RoomScreen = ({ leaveCall }: RoomScreenProps) => {
                 alignItems: 'center'
             }}
         >
-            <Stack direction={"row"}
-                sx={{
-                    height: '100%',
-                    width: '100%'
-                }}
-            >
-                <Stack
-                    sx={{
-                        height: '100%',
-                        width: '100%',
-                    }}
-                >
-                    <Call/>
-                    <Tray leaveCall={leaveCall}/>
-                </Stack>
-                <Chat showChat={true} toggleChat={() => console.log()}/>
-            </Stack>
+            
+            <Grid container columns={16}>
+                <Grid item md={13} lg={13}>
+                    <Stack
+                        sx={{
+                            height: '100%',
+                            width: '100%',
+                        }}
+                    >
+                        <Call/>
+                        <Tray leaveCall={leaveCall}/>
+                    </Stack>
+                </Grid>
+
+                <Grid item md={3} lg={3}>
+                    <Chat showChat={true} toggleChat={() => console.log()}/>
+                </Grid>
+            </Grid>
         </Box>
     );
 }

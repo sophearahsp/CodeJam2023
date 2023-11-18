@@ -2,17 +2,40 @@ import { useCallback, useState, FormEvent, MouseEvent, ChangeEvent } from 'react
 import { useAppMessage, useLocalParticipant } from '@daily-co/daily-react';
 import {DailyEventObjectAppMessage} from '@daily-co/daily-js';
 import { PlaceholderOtherIcon } from '../Icons';
-import { Box, TextField, Button, Stack } from "@mui/material";
+import { Box, TextField, Button, IconButton, Stack, InputAdornment, Typography } from "@mui/material";
+import {Send} from '@mui/icons-material';
 
 interface ChatProps {
     showChat: boolean;
     toggleChat: () => void;
 }
 
-
 type MessageData = {
     msg: string;
     name: string;
+}
+
+const MessageDialog = (props: {index: number, message: MessageData}) => {
+    const {message, index} = props;
+
+    return (
+        <Box
+            key={`message-${index}`}
+            sx={{
+                backgroundColor: '#F1F3F5',
+                borderRadius: '4px',
+                wordWrap: 'break-word',
+            }}
+            p={1}
+        >
+            <Typography fontWeight={700}>
+                {message?.name}
+            </Typography>
+            <Typography fontWeight={500}>
+                {message?.msg}
+            </Typography>
+        </Box>
+    )
 }
 
 const Chat = ({ showChat, toggleChat }: ChatProps) => {
@@ -66,6 +89,14 @@ const Chat = ({ showChat, toggleChat }: ChatProps) => {
         setInputValue(e.target.value);
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            if (!inputValue) return; // don't allow people to submit empty strings
+            sendMessage(inputValue);
+            setInputValue('');
+        }
+    };
+      
     const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (!inputValue) return; // don't allow people to submit empty strings
@@ -97,24 +128,55 @@ const Chat = ({ showChat, toggleChat }: ChatProps) => {
     }
 
     return showChat ? (
-        <Stack sx={{height: '100vh', display: 'flex'}}>
-            <Stack sx={{flexGrow: '1', overflowY: 'auto'}}>
+        <Stack
+            sx={{
+                height: '100vh',
+                display: 'flex',
+            }}
+        >
+            <Stack
+                spacing={2}
+                p={1}
+                sx={{
+                    flexGrow: '1',
+                    overflowY: 'auto',
+                }}
+            >
                 {messages?.map((message, index) => (
-                    <Box key={`message-${index}`}>
-                        <span>{message?.name}</span>:{' '}
-                        <p>{message?.msg}</p>
-                    </Box>
+                    <MessageDialog index={index} message={message}/>
                 ))}
             </Stack>
-            <Stack direction={"row"}>
-                <TextField value={inputValue} onChange={(e) => onChange(e)} placeholder="Type your message here.."></TextField>
-                <Button variant={"contained"} onClick={handleSubmit}>Submit</Button>
-            </Stack>
-            <Stack>
+            <Stack direction={"row"} p={2}>
+                <TextField
+                    fullWidth
+                    size={'medium'}
+                    value={inputValue}
+                    onChange={(e) => onChange(e)}
+                    placeholder="Type your message here.."
+                    onKeyDown={handleKeyDown}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    onClick={handleSubmit}
+                                    sx={{
+                                        borderRadius: '4px',
+                                    }}
+                                >
+                                    <Send />
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
+                >
+
+                </TextField>
+                </Stack>
+            {/* <Stack>
                 <Button onClick={SystemMessage}>
                     try me
                 </Button>
-            </Stack>
+            </Stack> */}
         </Stack>
     ) : null;
 }
