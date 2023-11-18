@@ -1,8 +1,8 @@
-import { useCallback, useState, FormEvent, ChangeEvent } from 'react';
+import { useCallback, useState, FormEvent, MouseEvent, ChangeEvent } from 'react';
 import { useAppMessage, useLocalParticipant } from '@daily-co/daily-react';
 import {DailyEventObjectAppMessage} from '@daily-co/daily-js';
 import { PlaceholderOtherIcon } from './Icons';
-
+import { Box, TextField, Button, Stack } from "@mui/material";
 
 interface ChatProps {
     showChat: boolean;
@@ -62,11 +62,12 @@ const Chat = ({ showChat, toggleChat }: ChatProps) => {
         [localParticipant, messages, sendAppMessage],
     );
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setInputValue(e.target.value);
     };
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    //FormEvent<HTMLFormElement>
+    const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (!inputValue) return; // don't allow people to submit empty strings
         sendMessage(inputValue);
@@ -74,34 +75,20 @@ const Chat = ({ showChat, toggleChat }: ChatProps) => {
     };
 
     return showChat ? (
-        <aside className="chat">
-            <div>hihuihuihui</div>
-            <button onClick={toggleChat} className="close-chat" type="button">
-                Close chat
-            </button>
-            <ul className="chat-messages">
+        <Stack sx={{height: '100vh', display: 'flex'}}>
+            <Stack sx={{flexGrow: '1', overflowY: 'auto'}}>
                 {messages?.map((message, index) => (
-                    <li key={`message-${index}`} className="chat-message">
-                        <span className="chat-message-author">{message?.name}</span>:{' '}
-                        <p className="chat-message-body">{message?.msg}</p>
-                    </li>
+                    <Box key={`message-${index}`}>
+                        <span>{message?.name}</span>:{' '}
+                        <p>{message?.msg}</p>
+                    </Box>
                 ))}
-            </ul>
-            <div className="add-message">
-                <form className="chat-form" onSubmit={handleSubmit}>
-                    <input
-                        className="chat-input"
-                        type="text"
-                        placeholder="Type your message here.."
-                        value={inputValue}
-                        onChange={(e) => onChange(e)}
-                    />
-                    <button type="submit" className="chat-submit-button">
-                        <PlaceholderOtherIcon /> submit
-                    </button>
-                </form>
-            </div>
-        </aside>
+            </Stack>
+            <Stack direction={"row"}>
+                <TextField value={inputValue} onChange={(e) => onChange(e)} placeholder="Type your message here.."></TextField>
+                <Button variant={"contained"} onClick={handleSubmit}>Submit</Button>
+            </Stack>
+        </Stack>
     ) : null;
 }
 
