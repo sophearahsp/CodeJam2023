@@ -1,0 +1,68 @@
+# Node.js
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+
+# Dependency directories
+lib/
+vendor/
+dist/
+
+# Debugging
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Output files
+*.bak
+*.swp
+*~
+
+# Yarn
+yarn-error.log
+yarn-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+.sass-cache/
+db.sqlite3
+
+# dotenv environment variable files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Optional: Editor/IDE specific files
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Optional: Logs and binaries
+logs/
+*.log
+*.sqlite
+*.dat
+*.dmp
+*.dll
+*.exe
+
+# Optional: macOS
+.DS_Store
+
+# Optional: Windows
+Thumbs.db
+Desktop.ini
