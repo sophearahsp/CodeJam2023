@@ -1,7 +1,7 @@
 import { useCallback, useState, FormEvent, MouseEvent, ChangeEvent } from 'react';
 import { useAppMessage, useLocalParticipant } from '@daily-co/daily-react';
 import {DailyEventObjectAppMessage} from '@daily-co/daily-js';
-import { PlaceholderOtherIcon } from './Icons';
+import { PlaceholderOtherIcon } from '../Icons';
 import { Box, TextField, Button, Stack } from "@mui/material";
 
 interface ChatProps {
@@ -66,13 +66,35 @@ const Chat = ({ showChat, toggleChat }: ChatProps) => {
         setInputValue(e.target.value);
     };
 
-    //FormEvent<HTMLFormElement>
     const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (!inputValue) return; // don't allow people to submit empty strings
         sendMessage(inputValue);
         setInputValue('');
     };
+
+    const SystemMessage = () => {
+        const defaultMessage = "this is a default message"
+
+        sendAppMessage(
+            {
+                msg: defaultMessage,
+                name: 'Bot',
+            },
+            '*',
+        );
+
+        /* Since we don't receive our own messages, we will set our message in the messages array.
+        * This way _we_ can also see what we wrote.
+        */
+        setMessages([
+            ...messages,
+            {
+                msg: defaultMessage,
+                name: 'Bot',
+            },
+        ]);
+    }
 
     return showChat ? (
         <Stack sx={{height: '100vh', display: 'flex'}}>
@@ -87,6 +109,11 @@ const Chat = ({ showChat, toggleChat }: ChatProps) => {
             <Stack direction={"row"}>
                 <TextField value={inputValue} onChange={(e) => onChange(e)} placeholder="Type your message here.."></TextField>
                 <Button variant={"contained"} onClick={handleSubmit}>Submit</Button>
+            </Stack>
+            <Stack>
+                <Button onClick={SystemMessage}>
+                    try me
+                </Button>
             </Stack>
         </Stack>
     ) : null;

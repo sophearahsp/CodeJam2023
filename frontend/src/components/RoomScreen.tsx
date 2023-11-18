@@ -9,8 +9,8 @@ import {
 } from '@daily-co/daily-react';
 import { Box, TextField, Button, Stack } from "@mui/material";
 import Call from './Call';
-import Tray from './Tray';
-import Chat from './Chat';
+import Tray from './Room/Tray';
+import Chat from './Room/Chat';
 
 interface RoomScreenProps {
 	leaveCall: () => void;
@@ -25,8 +25,7 @@ const RoomScreen = ({ leaveCall }: RoomScreenProps) => {
                 width: '100vw',
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'lightgray'
+                alignItems: 'center'
             }}
         >
             <Stack direction={"row"}

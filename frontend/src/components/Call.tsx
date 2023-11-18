@@ -45,6 +45,7 @@ export default function Call() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                // padding: '16px'
             }}
         >
             <Grid container columns={16}
@@ -73,11 +74,18 @@ export default function Call() {
                     </>
                 ) : (
                     <GridTile>
-                        <div className="info-box">
-                            <h1>Waiting for others</h1>
-                            <p>Invite someone by sharing this link:</p>
-                            <span className="room-url">{window.location.href}</span>
-                        </div>
+                        <Box
+                            sx={{
+                                backgroundColor: 'lightgray'
+                            }}
+                        >
+
+                            <div className="info-box">
+                                <h1>Waiting for others</h1>
+                                <p>Invite someone by sharing this link:</p>
+                                <span className="room-url">{window.location.href}</span>
+                            </div>
+                        </Box>
                     </GridTile>
                     
                 )}
