@@ -7,12 +7,12 @@ import {
   useAudioTrack,
   useDailyEvent,
 } from '@daily-co/daily-react';
-
-// import {
-//     PlaceholderOnIcon,
-//     PlaceholderOffIcon,
-//     PlaceholderOtherIcon
-// } from './Icons';
+import Chat from './Chat';
+import {
+    PlaceholderOnIcon,
+    PlaceholderOffIcon,
+    PlaceholderOtherIcon
+} from './Icons';
 
 interface TrayProps {
 	leaveCall: () => void;
@@ -64,7 +64,7 @@ const Tray = ({ leaveCall }: TrayProps) => {
     const toggleChat = () => {
         setShowChat(!showChat);
         if (newChatMessage) {
-        setNewChatMessage(!newChatMessage);
+            setNewChatMessage(!newChatMessage);
         }
     };
 
@@ -78,10 +78,10 @@ const Tray = ({ leaveCall }: TrayProps) => {
 
             {/*   We're also passing down the toggleChat() function to the component, so we can open and close the chat */}
             {/*   from the chat UI and not just the Tray. */}
-            {/* <Chat showChat={showChat} toggleChat={toggleChat} /> */}
+            <Chat showChat={showChat} toggleChat={toggleChat} />
             <div className="tray-buttons-container">
                 <div>TRAY HERE</div>
-                {/* <div className="controls">
+                <div className="controls">
                     <button onClick={toggleVideo} type="button">
                         {mutedVideo ? <PlaceholderOffIcon /> : <PlaceholderOnIcon />}
                         {mutedVideo ? 'Turn camera on' : 'Turn camera off'}
@@ -109,7 +109,7 @@ const Tray = ({ leaveCall }: TrayProps) => {
                     <button onClick={leaveCall} type="button">
                         <PlaceholderOtherIcon /> Leave call
                     </button>
-                </div> */}
+                </div>
             </div>
         </div>
     );
