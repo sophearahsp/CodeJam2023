@@ -43,8 +43,8 @@ const Tile = ({ id, isScreenShare, isLocal, isAlone }: TileProps) => {
     }
 
     return (
-        <div className={containerCssClasses}>
-            <DailyVideo automirror sessionId={id} type={isScreenShare ? 'screenVideo' : 'video'} />
+        <div>
+            <DailyVideo automirror sessionId={id} type={isScreenShare ? 'screenVideo' : 'video'} style={{width: '100%'}} fit="cover"/>
             <Username id={id} isLocal={isLocal} />
         </div>
     );

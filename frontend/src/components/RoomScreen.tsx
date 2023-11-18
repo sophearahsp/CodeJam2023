@@ -26,14 +26,25 @@ const RoomScreen = ({ leaveCall }: RoomScreenProps) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                backgroundColor: 'lightgray'
             }}
         >
-            <Stack direction={"row"}>
-                <Stack>
+            <Stack direction={"row"}
+                sx={{
+                    height: '100%',
+                    width: '100%'
+                }}
+            >
+                <Stack
+                    sx={{
+                        height: '100%',
+                        width: '100%',
+                    }}
+                >
                     <Call/>
                     <Tray leaveCall={leaveCall}/>
                 </Stack>
-                <Chat showChat={false} toggleChat={() => console.log()}/>
+                <Chat showChat={true} toggleChat={() => console.log()}/>
             </Stack>
         </Box>
     );

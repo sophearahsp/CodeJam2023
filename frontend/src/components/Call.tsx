@@ -6,6 +6,8 @@ import {
   useDailyEvent,
   DailyAudio,
 } from '@daily-co/daily-react';
+import { Box, TextField, Grid, Button, Stack } from "@mui/material";
+
 import Tile from './Tile';
 //import UserMediaError from '../UserMediaError/UserMediaError';
 
@@ -34,36 +36,111 @@ export default function Call() {
     );
 
     const renderCallScreen = () => (
-        <div>
-            {/* Your self view */}
-            {localParticipant && (
-                <Tile
-                    id={localParticipant.session_id}
-                    isLocal
-                    isAlone={isAlone}
-                    isScreenShare={false}
-                />
-            )}
-            {/* Videos of remote participants and screen shares */}
-            {remoteParticipantIds?.length > 0 || screens?.length > 0 ? (
-                <>
-                    {remoteParticipantIds.map((id) => (
-                        <Tile key={id} id={id} isScreenShare={false} isAlone={false} isLocal={false}/>
-                    ))}
-                    {screens.map((screen) => (
-                        <Tile key={screen.screenId} id={screen.session_id} isScreenShare isAlone={false} isLocal={false}/>
-                    ))}
-                    <DailyAudio />
-                </>
-            ) : (
-                // When there are no remote participants or screen shares
-                <div className="info-box">
-                    <h1>Waiting for others</h1>
-                    <p>Invite someone by sharing this link:</p>
-                    <span className="room-url">{window.location.href}</span>
-                </div>
-            )}
-        </div>
+        <Box
+            sx={{
+                height: '100%',
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}
+        >
+            <Grid container columns={16}
+                sx={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
+                <Grid item xs={8}>
+                    {localParticipant && (
+                        <Tile
+                            id={localParticipant.session_id}
+                            isLocal
+                            isAlone={isAlone}
+                            isScreenShare={false}
+                        />
+                    )}
+                </Grid>
+                <Grid item xs={8}>
+                    {localParticipant && (
+                        <Tile
+                            id={localParticipant.session_id}
+                            isLocal
+                            isAlone={isAlone}
+                            isScreenShare={false}
+                        />
+                    )}
+                </Grid>
+
+                <Grid item xs={8}>
+                    {localParticipant && (
+                        <Tile
+                            id={localParticipant.session_id}
+                            isLocal
+                            isAlone={isAlone}
+                            isScreenShare={false}
+                        />
+                    )}
+                </Grid>
+
+                <Grid item xs={8}>
+                    <Box>
+                        <h1>Waiting for others</h1>
+                        <p>Invite someone by sharing this link:</p>
+                        <span>{window.location.href}</span>
+                    </Box>
+                </Grid>
+                {/* Videos of remote participants and screen shares */}
+                {/* {remoteParticipantIds?.length > 0 || screens?.length > 0 ? (
+                    <>
+                        {remoteParticipantIds.map((id) => (
+                            <Tile key={id} id={id} isScreenShare={false} isAlone={false} isLocal={false}/>
+                        ))}
+                        {screens.map((screen) => (
+                            <Tile key={screen.screenId} id={screen.session_id} isScreenShare isAlone={false} isLocal={false}/>
+                        ))}
+                        <DailyAudio />
+                    </>
+                ) : (
+                    // When there are no remote participants or screen shares
+                    <div className="info-box">
+                        <h1>Waiting for others</h1>
+                        <p>Invite someone by sharing this link:</p>
+                        <span className="room-url">{window.location.href}</span>
+                    </div>
+                )} */}
+            </Grid>
+        </Box>
+        // <div>
+        //     {/* Your self view */}
+            // {localParticipant && (
+            //     <Tile
+            //         id={localParticipant.session_id}
+            //         isLocal
+            //         isAlone={isAlone}
+            //         isScreenShare={false}
+            //     />
+            // )}
+            // {/* Videos of remote participants and screen shares */}
+            // {remoteParticipantIds?.length > 0 || screens?.length > 0 ? (
+            //     <>
+            //         {remoteParticipantIds.map((id) => (
+            //             <Tile key={id} id={id} isScreenShare={false} isAlone={false} isLocal={false}/>
+            //         ))}
+            //         {screens.map((screen) => (
+            //             <Tile key={screen.screenId} id={screen.session_id} isScreenShare isAlone={false} isLocal={false}/>
+            //         ))}
+            //         <DailyAudio />
+            //     </>
+            // ) : (
+            //     // When there are no remote participants or screen shares
+            //     <div className="info-box">
+            //         <h1>Waiting for others</h1>
+            //         <p>Invite someone by sharing this link:</p>
+            //         <span className="room-url">{window.location.href}</span>
+            //     </div>
+            // )}
+        // </div>
     );
 
     return getUserMediaError ? <>USERMEDIAERROR</> : renderCallScreen();

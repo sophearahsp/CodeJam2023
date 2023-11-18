@@ -7,7 +7,7 @@ import {
   useAudioTrack,
   useDailyEvent,
 } from '@daily-co/daily-react';
-import { Box, TextField, Button, Stack } from "@mui/material";
+import { Box, TextField, ButtonGroup, Button, Stack } from "@mui/material";
 import Chat from './Chat';
 import {
     PlaceholderOnIcon,
@@ -70,38 +70,39 @@ const Tray = ({ leaveCall }: TrayProps) => {
     };
 
     return (
-        <Stack direction="row">
+        <Stack direction="row"
+            sx={{justifyContent: 'center'}}
+        >
             {/* <Chat showChat={showChat} toggleChat={toggleChat} /> */}
             
-            <div className="controls">
-                <button onClick={toggleVideo} type="button">
+            <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                <Button onClick={toggleVideo} variant="contained" color="primary" type="button">
                     {mutedVideo ? <PlaceholderOffIcon /> : <PlaceholderOnIcon />}
                     {mutedVideo ? 'Turn camera on' : 'Turn camera off'}
-                </button>
-                <button onClick={toggleAudio} type="button">
+                </Button>
+                <Button onClick={toggleAudio} variant="contained" color="primary" type="button">
                     {mutedAudio ? <PlaceholderOffIcon /> : <PlaceholderOnIcon />}
                     {mutedAudio ? 'Unmute mic' : 'Mute mic'}
-                </button>
-            </div>
-            <div className="actions">
-                <button onClick={toggleScreenShare} type="button">
+                </Button>
+
+                <Button onClick={toggleScreenShare} variant="contained" color="primary" type="button">
                     <PlaceholderOtherIcon />
                     {isSharingScreen ? 'Stop sharing screen' : 'Share screen'}
-                </button>
-                <button onClick={toggleMeetingInformation} type="button">
+                </Button>
+                <Button onClick={toggleMeetingInformation} variant="contained" color="primary" type="button">
                     <PlaceholderOtherIcon />
                     {showMeetingInformation ? 'Hide info' : 'Show info'}
-                </button>
-                <button onClick={toggleChat} type="button">
+                </Button>
+                <Button onClick={toggleChat} variant="contained" color="primary" type="button">
                     {newChatMessage ? <PlaceholderOnIcon /> : <PlaceholderOffIcon />}
                     {showChat ? 'Hide chat' : 'Show chat'}
-                </button>
-            </div>
-            <div className="leave">
-                <button onClick={leaveCall} type="button">
+                </Button>
+                <Button onClick={leaveCall} variant="contained" color="secondary" type="button">
                     <PlaceholderOtherIcon /> Leave call
-                </button>
-            </div>
+                </Button>
+            </ButtonGroup>
+
+
         </Stack>
         // <div className="tray">
         //     {/* {showMeetingInformation && <MeetingInformation />} */}
