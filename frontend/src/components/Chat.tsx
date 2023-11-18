@@ -97,7 +97,7 @@ const Chat = ({ showChat, toggleChat }: ChatProps) => {
                         onChange={(e) => onChange(e)}
                     />
                     <button type="submit" className="chat-submit-button">
-                        <PlaceholderOtherIcon />
+                        <PlaceholderOtherIcon /> submit
                     </button>
                 </form>
             </div>

@@ -34,35 +34,35 @@ export default function Call() {
     );
 
     const renderCallScreen = () => (
-        <div className={screens.length > 0 ? 'is-screenshare' : 'call'}>
-        {/* Your self view */}
-        {localParticipant && (
-            <Tile
-                id={localParticipant.session_id}
-                isLocal
-                isAlone={isAlone}
-                isScreenShare={false}
-            />
-        )}
-        {/* Videos of remote participants and screen shares */}
-        {remoteParticipantIds?.length > 0 || screens?.length > 0 ? (
-            <>
-                {remoteParticipantIds.map((id) => (
-                    <Tile key={id} id={id} isScreenShare={false} isAlone={false} isLocal={false}/>
-                ))}
-                {screens.map((screen) => (
-                    <Tile key={screen.screenId} id={screen.session_id} isScreenShare isAlone={false} isLocal={false}/>
-                ))}
-                <DailyAudio />
-            </>
-        ) : (
-            // When there are no remote participants or screen shares
-            <div className="info-box">
-                <h1>Waiting for others</h1>
-                <p>Invite someone by sharing this link:</p>
-                <span className="room-url">{window.location.href}</span>
-            </div>
-        )}
+        <div>
+            {/* Your self view */}
+            {localParticipant && (
+                <Tile
+                    id={localParticipant.session_id}
+                    isLocal
+                    isAlone={isAlone}
+                    isScreenShare={false}
+                />
+            )}
+            {/* Videos of remote participants and screen shares */}
+            {remoteParticipantIds?.length > 0 || screens?.length > 0 ? (
+                <>
+                    {remoteParticipantIds.map((id) => (
+                        <Tile key={id} id={id} isScreenShare={false} isAlone={false} isLocal={false}/>
+                    ))}
+                    {screens.map((screen) => (
+                        <Tile key={screen.screenId} id={screen.session_id} isScreenShare isAlone={false} isLocal={false}/>
+                    ))}
+                    <DailyAudio />
+                </>
+            ) : (
+                // When there are no remote participants or screen shares
+                <div className="info-box">
+                    <h1>Waiting for others</h1>
+                    <p>Invite someone by sharing this link:</p>
+                    <span className="room-url">{window.location.href}</span>
+                </div>
+            )}
         </div>
     );
 

@@ -8,6 +8,7 @@ import PreJoinScreen from "./components/PreJoinScreen";
 import HomeScreen from './components/HomeScreen';
 import Call from './components/Call';
 import Tray from './components/Tray';
+import RoomScreen from './components/RoomScreen';
 
 /* We decide what UI to show to users based on the state of the app, which is dependent on the state of the call object. */
 const STATE_IDLE = 'STATE_IDLE';
@@ -191,8 +192,7 @@ const QuickJoinPage = () => {
         if (showCall && callObject) {
             return (
                 <DailyProvider callObject={callObject}>
-                    <Call />
-                    <Tray leaveCall={startLeavingCall} />
+                    <RoomScreen leaveCall={startLeavingCall} />
                 </DailyProvider>
             );
         }

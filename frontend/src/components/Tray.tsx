@@ -7,6 +7,7 @@ import {
   useAudioTrack,
   useDailyEvent,
 } from '@daily-co/daily-react';
+import { Box, TextField, Button, Stack } from "@mui/material";
 import Chat from './Chat';
 import {
     PlaceholderOnIcon,
@@ -69,49 +70,82 @@ const Tray = ({ leaveCall }: TrayProps) => {
     };
 
     return (
-        <div className="tray">
-            {/* {showMeetingInformation && <MeetingInformation />} */}
-            {/*  The chat messages 'live' in the <Chat/> component's state. We can't just remove the component */}
-            {/*  from the DOM when hiding the chat, because that would cause us to lose that state. So we're */}
-            {/*  choosing a slightly different approach of toggling the chat: always render the component, but only */}
-            {/*  render its HTML when showChat is set to true. */}
-
-            {/*   We're also passing down the toggleChat() function to the component, so we can open and close the chat */}
-            {/*   from the chat UI and not just the Tray. */}
-            <Chat showChat={showChat} toggleChat={toggleChat} />
-            <div className="tray-buttons-container">
-                <div>TRAY HERE</div>
-                <div className="controls">
-                    <button onClick={toggleVideo} type="button">
-                        {mutedVideo ? <PlaceholderOffIcon /> : <PlaceholderOnIcon />}
-                        {mutedVideo ? 'Turn camera on' : 'Turn camera off'}
-                    </button>
-                    <button onClick={toggleAudio} type="button">
-                        {mutedAudio ? <PlaceholderOffIcon /> : <PlaceholderOnIcon />}
-                        {mutedAudio ? 'Unmute mic' : 'Mute mic'}
-                    </button>
-                </div>
-                <div className="actions">
-                    <button onClick={toggleScreenShare} type="button">
-                        <PlaceholderOtherIcon />
-                        {isSharingScreen ? 'Stop sharing screen' : 'Share screen'}
-                    </button>
-                    <button onClick={toggleMeetingInformation} type="button">
-                        <PlaceholderOtherIcon />
-                        {showMeetingInformation ? 'Hide info' : 'Show info'}
-                    </button>
-                    <button onClick={toggleChat} type="button">
-                        {newChatMessage ? <PlaceholderOnIcon /> : <PlaceholderOffIcon />}
-                        {showChat ? 'Hide chat' : 'Show chat'}
-                    </button>
-                </div>
-                <div className="leave">
-                    <button onClick={leaveCall} type="button">
-                        <PlaceholderOtherIcon /> Leave call
-                    </button>
-                </div>
+        <Stack direction="row">
+            {/* <Chat showChat={showChat} toggleChat={toggleChat} /> */}
+            
+            <div className="controls">
+                <button onClick={toggleVideo} type="button">
+                    {mutedVideo ? <PlaceholderOffIcon /> : <PlaceholderOnIcon />}
+                    {mutedVideo ? 'Turn camera on' : 'Turn camera off'}
+                </button>
+                <button onClick={toggleAudio} type="button">
+                    {mutedAudio ? <PlaceholderOffIcon /> : <PlaceholderOnIcon />}
+                    {mutedAudio ? 'Unmute mic' : 'Mute mic'}
+                </button>
             </div>
-        </div>
+            <div className="actions">
+                <button onClick={toggleScreenShare} type="button">
+                    <PlaceholderOtherIcon />
+                    {isSharingScreen ? 'Stop sharing screen' : 'Share screen'}
+                </button>
+                <button onClick={toggleMeetingInformation} type="button">
+                    <PlaceholderOtherIcon />
+                    {showMeetingInformation ? 'Hide info' : 'Show info'}
+                </button>
+                <button onClick={toggleChat} type="button">
+                    {newChatMessage ? <PlaceholderOnIcon /> : <PlaceholderOffIcon />}
+                    {showChat ? 'Hide chat' : 'Show chat'}
+                </button>
+            </div>
+            <div className="leave">
+                <button onClick={leaveCall} type="button">
+                    <PlaceholderOtherIcon /> Leave call
+                </button>
+            </div>
+        </Stack>
+        // <div className="tray">
+        //     {/* {showMeetingInformation && <MeetingInformation />} */}
+        //     {/*  The chat messages 'live' in the <Chat/> component's state. We can't just remove the component */}
+        //     {/*  from the DOM when hiding the chat, because that would cause us to lose that state. So we're */}
+        //     {/*  choosing a slightly different approach of toggling the chat: always render the component, but only */}
+        //     {/*  render its HTML when showChat is set to true. */}
+
+        //     {/*   We're also passing down the toggleChat() function to the component, so we can open and close the chat */}
+        //     {/*   from the chat UI and not just the Tray. */}
+        //     <Chat showChat={showChat} toggleChat={toggleChat} />
+            // <div className="tray-buttons-container">
+            //     <div>TRAY HERE</div>
+            //     <div className="controls">
+            //         <button onClick={toggleVideo} type="button">
+            //             {mutedVideo ? <PlaceholderOffIcon /> : <PlaceholderOnIcon />}
+            //             {mutedVideo ? 'Turn camera on' : 'Turn camera off'}
+            //         </button>
+            //         <button onClick={toggleAudio} type="button">
+            //             {mutedAudio ? <PlaceholderOffIcon /> : <PlaceholderOnIcon />}
+            //             {mutedAudio ? 'Unmute mic' : 'Mute mic'}
+            //         </button>
+            //     </div>
+            //     <div className="actions">
+            //         <button onClick={toggleScreenShare} type="button">
+            //             <PlaceholderOtherIcon />
+            //             {isSharingScreen ? 'Stop sharing screen' : 'Share screen'}
+            //         </button>
+            //         <button onClick={toggleMeetingInformation} type="button">
+            //             <PlaceholderOtherIcon />
+            //             {showMeetingInformation ? 'Hide info' : 'Show info'}
+            //         </button>
+            //         <button onClick={toggleChat} type="button">
+            //             {newChatMessage ? <PlaceholderOnIcon /> : <PlaceholderOffIcon />}
+            //             {showChat ? 'Hide chat' : 'Show chat'}
+            //         </button>
+            //     </div>
+            //     <div className="leave">
+            //         <button onClick={leaveCall} type="button">
+            //             <PlaceholderOtherIcon /> Leave call
+            //         </button>
+            //     </div>
+            // </div>
+        // </div>
     );
 }
 
