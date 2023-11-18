@@ -210,15 +210,6 @@ const QuickJoinPage = () => {
             }}
         >
             {renderApp()}
-
-            {/* <Stack>
-                <TextField
-                    sx={{ marginBottom: '32px' }}
-                />
-                <Button variant="contained">
-                    Join
-                </Button>
-            </Stack> */}
         </Box>
     )
 }
