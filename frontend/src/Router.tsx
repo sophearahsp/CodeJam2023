@@ -6,14 +6,32 @@ import DashboardPage from './DashboardPage';
 import { create } from 'zustand'
 import QuickJoinPage from './QuickJoinPage';
 
+export interface Profile {
+    username: string;
+    bio: string;
+    user_id: number;
+}
+
+export interface User {
+    id: number;
+}
+
 interface AuthStore {
     authenticated: boolean;
     setAuthenticated: (value: boolean) => void;
+    user: User | null;
+    profile: Profile | null;
+    setUser: (value: User) => void;
+    setProfile: (value: Profile) => void;
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
     authenticated: false,
     setAuthenticated: (value) => set({ authenticated: value }),
+    user: null,
+    profile: null,
+    setUser: (value: User) => set({user: value}),
+    setProfile: (value: Profile) => set({profile: value}),
 }));
   
 const Router = () => {
@@ -33,7 +51,16 @@ const Router = () => {
                     path="/home"
                     element={
                         <RequireAuth>
-                            <DashboardPage />
+                            <DashboardPage profile={false}/>
+                        </RequireAuth>
+                    }
+                />
+
+                <Route
+                    path="/user/:username"
+                    element={
+                        <RequireAuth>
+                            <DashboardPage profile={true}/>
                         </RequireAuth>
                     }
                 />

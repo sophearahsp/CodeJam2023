@@ -10,6 +10,8 @@ import {useAuthStore} from './Router';
 const AuthPage: React.FC = () => {
     const authenticated = useAuthStore((state) => state.authenticated);
     const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
+    const setUser = useAuthStore((state) => state.setUser);
+    const setProfile = useAuthStore((state) => state.setProfile);
     const navigate = useNavigate();
   
     useEffect(() => {
@@ -29,6 +31,32 @@ const AuthPage: React.FC = () => {
                 navigate('/login');
             }
         })
+
+        const fetchUserData = async () => {
+            try {
+                const { data: d, error: userError } = await supabase.auth.getUser();
+
+                setUser(d.user);
+
+                // Fetch user profile data
+                const { data: profileData, error: profileError } = await supabase
+                    .from('profiles')
+                    .select('user_id, username, bio')
+                    .eq('user_id', d.user.id)
+                    .single();
+                
+                if (profileError) {
+                    throw profileError;
+                }
+
+                setProfile(profileData);
+                
+            } catch (error) {
+                console.error('Error fetching data', error);
+            }
+        };
+
+        fetchUserData();
     }, [setAuthenticated, navigate]);
   
     return (

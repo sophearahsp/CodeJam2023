@@ -5,6 +5,7 @@ import { supabase } from './supabaseClient'
 import {Post} from './Feed';
 import EditIcon from '@mui/icons-material/Edit';
 import EditProfileModal from './components/Dashboard/EditProfileModal';
+import {useParams} from 'react-router-dom';
 
 const bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 
@@ -25,6 +26,7 @@ function Profile() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    let { username } = useParams();
 
     useEffect(() => {
         // Fetch user data and posts from Supabase
@@ -38,7 +40,7 @@ function Profile() {
                 const { data: profileData, error: profileError } = await supabase
                     .from('profiles')
                     .select('user_id, username, bio')
-                    .eq('user_id', d.user.id)
+                    .eq('username', username || profile?.username)
                     .single();
                 
                 if (profileError) {
@@ -47,10 +49,16 @@ function Profile() {
                 
                 setProfile(profileData);
 
+                const { data: userFromUsername, error: userFromUsernameError } = await supabase
+                    .from('profiles')
+                    .select('username, user_id')
+                    .eq('username', username || profile?.username)
+                    .single();
+                
                 const { data: fetchedPosts, error } = await supabase
                     .from('posts')
                     .select('id, content, user_id')
-                    .eq('user_id', d.user.id);
+                    .eq('user_id', userFromUsername?.user_id || d.user.id)
 
                 if (error) {
                     throw error;

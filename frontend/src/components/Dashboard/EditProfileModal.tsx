@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Button, TextField, Typography, Box, Modal, Stack} from '@mui/material'
 import { supabase } from '../../supabaseClient'
+import {useAuthStore} from '../../Router';
 
 export interface Profile {
     username: string;
@@ -17,37 +18,14 @@ function EditProfileModal(props: { open: boolean; handleClose: () => void }) {
 
     const [bio, setBio] = useState('');
     const [username, setUsername] = useState('');
-    const [user, setUser] = useState<User | null>(null);
-    const [profile, setProfile] = useState<Profile | null>(null);
+    
+    const user = useAuthStore((state) => state.user);
+    const profile = useAuthStore((state) => state.profile);
 
     useEffect(() => {
-        // Fetch user data and posts from Supabase
-        const fetchUserData = async () => {
-            try {
-                const { data: d, error: userError } = await supabase.auth.getUser();
-
-                setUser(d.user);
-
-                // Fetch user profile data
-                const { data: profileData, error: profileError } = await supabase
-                    .from('profiles')
-                    .select('user_id, username, bio')
-                    .eq('user_id', d.user.id)
-                    .single();
-                
-                if (profileError) {
-                    throw profileError;
-                }
-                
-                setProfile(profileData);
-                setUsername(profileData.username);
-                setBio(profileData.bio);
-            } catch (error) {
-                console.error('Error fetching data', error);
-            }
-        };
-
-        fetchUserData();
+        if (profile)
+        setBio(profile?.bio)
+        setUsername(profile?.username || "")
     }, []);
 
     const handleSave = async () => {
@@ -115,7 +93,7 @@ function EditProfileModal(props: { open: boolean; handleClose: () => void }) {
                 />
 
                 <Stack direction={"row"} spacing={1} sx={{justifyContent: 'flex-end'}}>
-                    <Button variant="outlined" color="primary" onClick={() => console.log("cancel")}>
+                    <Button variant="outlined" color="primary" onClick={() => console.log(storeUser)}>
                         Cancel
                     </Button>
                     <Button variant="contained" color="primary" onClick={handleSave}>

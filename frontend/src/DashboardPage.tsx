@@ -5,15 +5,19 @@ import Feed from './Feed';
 import CreateModal from './components/Dashboard/CreateModal';
 import { useNavigate } from 'react-router-dom';
 import Profile from './Profile';
+import {useAuthStore} from './Router';
 
-function DashboardPage() {
-    const [profileView, setProfileView] = React.useState(false);
+function DashboardPage(props: {profile: boolean}) {
+    const [profileView, setProfileView] = React.useState(props.profile);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const navigate = useNavigate();
-    
+    const user = useAuthStore((state) => state.user);
+    const profile = useAuthStore((state) => state.profile);
+
     const handleProfile = (e: MouseEvent<HTMLButtonElement>) => {
+        navigate('/user/'+profile?.username)
         setProfileView(true)
     }
 
@@ -49,6 +53,9 @@ function DashboardPage() {
                             <Stack
                                 spacing={2}
                             >
+                                <Typography>
+                                    {user?.id || "no user id yet"}
+                                </Typography>
                                 <Button
                                     size={"large"}
                                     style={{ width: '100%' }}
