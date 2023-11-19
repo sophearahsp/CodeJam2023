@@ -30,7 +30,4 @@ export default function AuthPage() {
             </div>
         )
     }
-    else {
-        return (<div>Logged in!</div>)
-    }
 }
