@@ -5,7 +5,15 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import SendIcon from '@mui/icons-material/Send';
 import ShareIcon from '@mui/icons-material/Share';
 
-const FeedPost = () => {
+
+interface FeedPostProps {
+    id: number;
+    content: string;
+    user_id: number;
+}
+
+const FeedPost = ({ id, content, user_id }: FeedPostProps) => {
+
     return (
         <Box
             p={3}
@@ -31,12 +39,12 @@ const FeedPost = () => {
                             marginRight: '12px',
                         }}
                     />
-                    <Typography variant="subtitle1">Poster's Name</Typography>
+                    <Typography variant="subtitle1">{user_id}</Typography>
                 </Box>
 
                 {/* Content: Text and Image */}
                 <Stack spacing={1}>
-                    <Typography variant="body1">Content of the post goes here...</Typography>
+                    <Typography variant="body1">{content}</Typography>
                     {/* Add an Image component if applicable */}
                     {/* <img src="https://www.worldatlas.com/r/w768/upload/4f/c4/b6/shutterstock-108457985.jpg" alt="Post Image"
                         style={{
