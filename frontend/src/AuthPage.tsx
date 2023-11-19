@@ -1,33 +1,48 @@
+// AuthPage.tsx
+import React, { useState, useEffect } from 'react';
+import { Session, createClient } from '@supabase/supabase-js';
+import { Auth } from '@supabase/auth-ui-react';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
+import { useNavigate, BrowserRouter } from 'react-router-dom';
+import { supabase } from './supabaseClient'
+import {useAuthStore} from './Router';
 
-import { useState, useEffect } from 'react'
-import { Session, createClient } from '@supabase/supabase-js'
-import { Auth } from '@supabase/auth-ui-react'
-import { ThemeSupa } from '@supabase/auth-ui-shared'
-
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_PUBLIC_ANON_KEY)
-
-export default function AuthPage() {
-    const [session, setSession] = useState<Session | null>(null)
-
+const AuthPage: React.FC = () => {
+    const authenticated = useAuthStore((state) => state.authenticated);
+    const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
+    const navigate = useNavigate();
+  
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
-            setSession(session)
+            if (session) {
+                setAuthenticated(true);
+                navigate('/dashboard'); // Redirect to /dashboard if authenticated
+            }
         })
 
-        const {
-            data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session)
+        supabase.auth.onAuthStateChange((_event, session) => {
+            if (session) {
+                setAuthenticated(true);
+                navigate('/dashboard'); // Redirect to /dashboard if authenticated
+            } else {
+                setAuthenticated(false);
+                navigate('/login');
+            }
         })
+    }, [setAuthenticated, navigate]);
+  
+    return (
+        <>
+            {!authenticated ? (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw' }}>
+                    <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
+                </div>
 
-        return () => subscription.unsubscribe()
-    }, [])
+            ) : (
+                <div>Redirecting to Dashboard...</div>
+            )}
+        </>
+    );
+};
 
-    if (!session) {
-        return (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw' }}>
-                <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
-            </div>
-        )
-    }
-}
+export default AuthPage;
