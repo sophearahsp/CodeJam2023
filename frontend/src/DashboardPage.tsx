@@ -1,24 +1,14 @@
-import { useState } from 'react'
-import { Box, TextField, Paper, Button, Grid, Stack, Typography } from "@mui/material";
+import React, { useState } from 'react'
+import { Box, Modal, TextField, Paper, Button, Grid, Stack, Typography } from "@mui/material";
 import { supabase } from './supabaseClient'
-import FeedPost from './FeedPost';
-
-const Feed = () => {
-    return (
-        <Stack
-            p={3}
-            spacing={4}
-        >
-            <FeedPost/>
-            <FeedPost/>
-            <FeedPost/>
-            <FeedPost/>
-            <FeedPost/>
-        </Stack>
-    )
-}
+import Feed from './Feed';
+import CreateModal from './components/Dashboard/CreateModal';
 
 function DashboardPage() {
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    
     return (
         <Box
             sx={{
@@ -29,6 +19,9 @@ function DashboardPage() {
                 alignItems: 'center',
             }}
         >
+            
+            <CreateModal open={open} handleClose={handleClose}/>
+            
             <Grid container sx={{height: '100%'}}>
                 {/* Left Section */}
                 <Grid item xs={3} p={2} sx={{height: '100%'}}>
@@ -43,21 +36,32 @@ function DashboardPage() {
                             <Button size={"large"} style={{ width: '100%' }} variant="contained" color="primary">
                                 JOIN
                             </Button>
-                            <Button
-                                size={"large"}
-                                style={{ width: '100%' }}
-                                variant="outlined" color="primary"
-                                onClick={() => supabase.auth.signOut()}
+                            <Stack
+                                spacing={2}
                             >
-                                Sign Out
-                            </Button>
-
+                                <Button
+                                    size={"large"}
+                                    style={{ width: '100%' }}
+                                    variant="outlined" color="primary"
+                                    onClick={handleOpen}
+                                >
+                                    Create
+                                </Button>
+                                <Button
+                                    size={"large"}
+                                    style={{ width: '100%' }}
+                                    variant="outlined" color="primary"
+                                    onClick={() => supabase.auth.signOut()}
+                                >
+                                    Sign Out
+                                </Button>
+                            </Stack>
                         </Stack>
                     {/* </Paper> */}
                 </Grid>
 
                 {/* Middle Section */}
-                <Grid item xs={6} sx={{height: '100%', overflowY: 'auto'}}>
+                <Grid item xs={6} sx={{height: '100%', overflowY: 'auto'}} p={2} >
                     <Feed/>
                 </Grid>
 

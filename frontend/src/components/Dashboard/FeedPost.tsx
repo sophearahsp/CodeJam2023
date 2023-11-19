@@ -19,7 +19,6 @@ const FeedPost = () => {
             }}
         >
             <Stack spacing={2}>
-
                 {/* Header: Account Image and Name */}
                 <Box
                     sx={{
@@ -39,12 +38,12 @@ const FeedPost = () => {
                 <Stack spacing={1}>
                     <Typography variant="body1">Content of the post goes here...</Typography>
                     {/* Add an Image component if applicable */}
-                    <img src="https://www.worldatlas.com/r/w768/upload/4f/c4/b6/shutterstock-108457985.jpg" alt="Post Image"
+                    {/* <img src="https://www.worldatlas.com/r/w768/upload/4f/c4/b6/shutterstock-108457985.jpg" alt="Post Image"
                         style={{
                             width: '100%',  // Ensure the image fills the width of the container
                             borderRadius: '4px',  // Apply rounded corners
                         }}
-                    />
+                    /> */}
                 </Stack>
             </Stack>
             
