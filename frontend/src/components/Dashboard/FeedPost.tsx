@@ -39,7 +39,7 @@ const FeedPost = ({ id, content, user_id }: FeedPostProps) => {
                             marginRight: '12px',
                         }}
                     />
-                    <Typography variant="subtitle1">{user_id}</Typography>
+                    <Typography fontWeight={"bold"}>{user_id}</Typography>
                 </Box>
 
                 {/* Content: Text and Image */}

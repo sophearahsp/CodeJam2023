@@ -86,7 +86,7 @@ const PreJoinScreen = ({ joinCall, cancelCall }: PreJoinScreenProps) => {
                     value={localParticipant?.user_name || ''}
                 />
                 
-                {/* <TextField label="Room" placeholder="Room"/> */}
+                <TextField label="Room" placeholder="Room"/>
 
                 <Button variant="contained" onClick={join} size="large">
                     Join
