@@ -13,6 +13,7 @@ export interface Profile {
     username: string;
     bio: string;
     user_id: number;
+    image_url: string;
 }
 
 export interface User {
@@ -39,7 +40,7 @@ function Profile() {
                 // Fetch user profile data
                 const { data: profileData, error: profileError } = await supabase
                     .from('profiles')
-                    .select('user_id, username, bio')
+                    .select('user_id, username, bio, image_url')
                     .eq('username', username || profile?.username)
                     .single();
                 
@@ -57,7 +58,7 @@ function Profile() {
                 
                 const { data: fetchedPosts, error } = await supabase
                     .from('posts')
-                    .select('id, content, user_id, profile_id (username)')
+                    .select('id, content, user_id, profile_id (username, image_url)')
                     .eq('user_id', userFromUsername?.user_id || d.user.id)
 
                 if (error) {
@@ -84,7 +85,7 @@ function Profile() {
                     >
                         <Avatar
                             alt={'altcontent'}
-                            src={'https://m.media-amazon.com/images/I/61hOiRFDCHL._AC_UF1000,1000_QL80_.jpg'}
+                            src={profile ? profile.image_url : ""}
                             sx={{ width: 100, height: 100 }}
                         />
                         <IconButton
@@ -105,7 +106,9 @@ function Profile() {
             <Stack spacing={2}>
                 {posts.map((post) => (
                     <div key={post.id}>
-                        <FeedPost id={post.id} content={post.content} user_id={post.profile_id.username} />
+                        <FeedPost id={post.id} content={post.content} user_id={post.profile_id.username}
+                            image_url={post.profile_id.image_url || ""}
+                        />
                     </div>
                 ))}
             </Stack>

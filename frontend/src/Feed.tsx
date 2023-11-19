@@ -8,6 +8,7 @@ export interface Post {
     content: string;
     user_id: number;
     profile_id: {
+        image_url: string;
         username: string
     }
 }
@@ -21,7 +22,7 @@ const Feed = () => {
             try {
                 const { data: fetchedPosts, error } = await supabase
                     .from('posts')
-                    .select('id, content, user_id, profile_id (username)');
+                    .select('id, content, user_id, profile_id (username, image_url)');
                 if (error) {
                     throw error;
                 }
@@ -44,7 +45,7 @@ const Feed = () => {
             {posts.length > 0 ? (
                 posts.map((post: Post) => (
                     <div key={post.id}>
-                        <FeedPost id={post.id} content={post.content} user_id={post.profile_id.username} />
+                        <FeedPost id={post.id} content={post.content} user_id={post.profile_id.username} image_url={post.profile_id.image_url || ""} />
                     </div>
                 ))
             ) : (

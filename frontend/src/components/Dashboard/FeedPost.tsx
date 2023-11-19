@@ -9,9 +9,10 @@ interface FeedPostProps {
     id: number;
     content: string;
     user_id: string;
+    image_url: string;
 }
 
-const FeedPost = ({ id, content, user_id }: FeedPostProps) => {
+const FeedPost = ({ id, content, user_id, image_url }: FeedPostProps) => {
 
     return (
         <Box
@@ -36,7 +37,9 @@ const FeedPost = ({ id, content, user_id }: FeedPostProps) => {
                     <Avatar
                         sx={{
                             marginRight: '12px',
+
                         }}
+                        src={image_url}
                     />
                     <Typography fontWeight={"bold"}>{user_id}</Typography>
                 </Box>
