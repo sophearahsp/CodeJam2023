@@ -51,7 +51,7 @@ export default function Call() {
                 sx={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: remoteParticipantIds?.length > 0 ? '100%' : '50%',
+                    height: '100%',
                 }}
             >
                 {localParticipant && (
@@ -62,41 +62,15 @@ export default function Call() {
                         isScreenShare={false}
                     />
                 )}
-                {remoteParticipantIds?.length > 0 || screens?.length > 0 ? (
-                    <>
-                        {remoteParticipantIds.map((id) => (
-                            <VideoTile key={id} id={id} isScreenShare={false} isAlone={false} isLocal={false}/>
-                        ))}
-                        {screens.map((screen) => (
-                            <VideoTile key={screen.screenId} id={screen.session_id} isScreenShare isAlone={false} isLocal={false}/>
-                        ))}
-                        <DailyAudio />
-                    </>
-                ) : (
-                    <GridTile>
-                        <Box
-                            padding={2}
-                            sx={{
-                                height: '100%',
-                                backgroundColor: 'lightblue',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                borderRadius: '8px',
-                            }}
-                        >
-                            <Stack>
-                                <Typography sx={{fontWeight: 'bold'}}>
-                                    Waiting for others
-                                </Typography>
-
-                                <Typography>
-                                    Invite someone by sharing this link: {window.location.href}
-                                </Typography>
-                            </Stack>
-                        </Box>
-                    </GridTile>
-                )}
+                <>
+                    {remoteParticipantIds.map((id) => (
+                        <VideoTile key={id} id={id} isScreenShare={false} isAlone={false} isLocal={false}/>
+                    ))}
+                    {screens.map((screen) => (
+                        <VideoTile key={screen.screenId} id={screen.session_id} isScreenShare isAlone={false} isLocal={false}/>
+                    ))}
+                    <DailyAudio />
+                </>
             </Grid>
         </Box>
     );

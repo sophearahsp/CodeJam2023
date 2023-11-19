@@ -1,5 +1,4 @@
 import { DailyVideo, useMediaTrack } from '@daily-co/daily-react';
-import { useParticipantProperty } from '@daily-co/daily-react';
 import UsernameLabel from './UsernameLabel';
 import GridTile from './GridTile';
 
@@ -14,7 +13,7 @@ const VideoTile = ({ id, isScreenShare, isLocal, isAlone }: TileProps) => {
 
     return (
         <GridTile>
-            <DailyVideo automirror sessionId={id} type={isScreenShare ? 'screenVideo' : 'video'} style={{width: '100%', borderRadius: '8px'}} fit="cover"/>
+            <DailyVideo automirror sessionId={id} type={isScreenShare ? 'screenVideo' : 'video'} style={{width: '100%', borderRadius: '8px'}}/>
             <UsernameLabel id={id} isLocal={isLocal} />
         </GridTile>
     );

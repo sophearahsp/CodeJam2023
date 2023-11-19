@@ -8,9 +8,7 @@ const GridTile = (props: {children: ReactNode}) => {
         <Grid
             item
             xs={8}
-            sx={{
-                height: '100%'
-            }}
+            sx={{ position: 'relative', overflow: 'hidden'}}
         >
             {props.children}
         </Grid>
