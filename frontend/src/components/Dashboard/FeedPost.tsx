@@ -5,11 +5,10 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import SendIcon from '@mui/icons-material/Send';
 import ShareIcon from '@mui/icons-material/Share';
 
-
 interface FeedPostProps {
     id: number;
     content: string;
-    user_id: number;
+    user_id: string;
 }
 
 const FeedPost = ({ id, content, user_id }: FeedPostProps) => {

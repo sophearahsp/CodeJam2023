@@ -47,22 +47,23 @@ function DashboardPage(props: {profile: boolean}) {
                         >
                             <Button size={"large"} style={{ width: '100%' }} variant="contained" color="primary"
                                 onClick={() => navigate('/quickjoin')}
+                                
                             >
-                                JOIN
+                                
+                                <Typography fontWeight={"bold"}>
+                                    JOIN
+                                </Typography>
                             </Button>
                             <Stack
-                                spacing={2}
+                                spacing={1}
                             >
-                                <Typography>
-                                    {user?.id || "no user id yet"}
-                                </Typography>
                                 <Button
                                     size={"large"}
                                     style={{ width: '100%' }}
                                     variant="outlined" color="primary"
                                     onClick={handleOpen}
                                 >
-                                    Create
+                                    POST
                                 </Button>
 
                                 <Button

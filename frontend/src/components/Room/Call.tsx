@@ -7,6 +7,7 @@ import {
   DailyAudio,
 } from '@daily-co/daily-react';
 import { Box, TextField, Typography, Grid, Button, Stack } from "@mui/material";
+import {useAuthStore, AuthStore } from '../../Router';
 
 import VideoTile from './VideoTile';
 import GridTile from './GridTile';
@@ -14,6 +15,8 @@ import GridTile from './GridTile';
 //import UserMediaError from '../UserMediaError/UserMediaError';
 
 export default function Call() {
+    const profile = useAuthStore((state: AuthStore) => state.profile);
+
     /* If a participant runs into a getUserMedia() error, we need to warn them. */
     const [getUserMediaError, setGetUserMediaError] = useState(false);
 

@@ -16,7 +16,7 @@ export interface User {
     id: number;
 }
 
-interface AuthStore {
+export interface AuthStore {
     authenticated: boolean;
     setAuthenticated: (value: boolean) => void;
     user: User | null;

@@ -79,12 +79,12 @@ const PreJoinScreen = ({ joinCall, cancelCall }: PreJoinScreenProps) => {
                     }
                 </Box>
 
-                <TextField
+                {/* <TextField
                     label="Username"
                     placeholder="Username"
                     onChange={(e) => onChange(e)}
                     value={localParticipant?.user_name || ''}
-                />
+                /> */}
                 
                 <TextField label="Room" placeholder="Room"/>
 

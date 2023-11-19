@@ -57,7 +57,7 @@ function Profile() {
                 
                 const { data: fetchedPosts, error } = await supabase
                     .from('posts')
-                    .select('id, content, user_id')
+                    .select('id, content, user_id, profile_id (username)')
                     .eq('user_id', userFromUsername?.user_id || d.user.id)
 
                 if (error) {
@@ -105,7 +105,7 @@ function Profile() {
             <Stack spacing={2}>
                 {posts.map((post) => (
                     <div key={post.id}>
-                        <FeedPost id={post.id} content={post.content} user_id={post.user_id} />
+                        <FeedPost id={post.id} content={post.content} user_id={post.profile_id.username} />
                     </div>
                 ))}
             </Stack>
