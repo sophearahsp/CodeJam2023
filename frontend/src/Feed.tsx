@@ -18,13 +18,12 @@ const Feed = () => {
             try {
                 const { data: fetchedPosts, error } = await supabase
                     .from('posts')
-                    .select('content'); // Adjust columns as per your 'posts' table structure
-
+                    .select('id, content, user_id');
                 if (error) {
                     throw error;
                 }
 
-                setPosts(posts || []);
+                setPosts(fetchedPosts);
             } catch (error) {
                 console.error('Error fetching posts', error);
             }
@@ -35,12 +34,13 @@ const Feed = () => {
 
     return (
         <Stack
-            // p={2}
             spacing={2}
         >
             {posts.length > 0 ? (
                 posts.map((post: Post) => (
-                    <FeedPost key={post.id} content={post.content} userId={post.user_id} />
+                    <div key={post.id}>
+                        <FeedPost id={post.id} content={post.content} user_id={post.user_id} />
+                    </div>
                 ))
             ) : (
                 <Typography>No posts available</Typography>

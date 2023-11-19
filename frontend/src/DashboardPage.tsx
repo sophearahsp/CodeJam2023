@@ -3,12 +3,14 @@ import { Box, Modal, TextField, Paper, Button, Grid, Stack, Typography } from "@
 import { supabase } from './supabaseClient'
 import Feed from './Feed';
 import CreateModal from './components/Dashboard/CreateModal';
+import { useNavigate } from 'react-router-dom';
 
 function DashboardPage() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    
+    const navigate = useNavigate();
+
     return (
         <Box
             sx={{
@@ -33,7 +35,9 @@ function DashboardPage() {
                                 height: '100%'
                             }}
                         >
-                            <Button size={"large"} style={{ width: '100%' }} variant="contained" color="primary">
+                            <Button size={"large"} style={{ width: '100%' }} variant="contained" color="primary"
+                                onClick={() => navigate('/quickjoin')}
+                            >
                                 JOIN
                             </Button>
                             <Stack
@@ -61,7 +65,7 @@ function DashboardPage() {
                 </Grid>
 
                 {/* Middle Section */}
-                <Grid item xs={6} sx={{height: '100%', overflowY: 'auto'}} p={2} >
+                <Grid item xs={6} sx={{height: '100%', overflowY: 'auto', borderLeft: 1, borderRight: 1, borderColor: '#DEE2E6'}} p={2} >
                     <Feed/>
                 </Grid>
 
