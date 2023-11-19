@@ -25,12 +25,12 @@ const Router = () => {
                 <Route
                     path="/"
                     element={
-                        authenticated ? <Navigate to="/dashboard" replace={true} /> : <Navigate to="/login" replace={true} />
+                        authenticated ? <Navigate to="/home" replace={true} /> : <Navigate to="/login" replace={true} />
                     }
                 />
 
                 <Route
-                    path="/dashboard"
+                    path="/home"
                     element={
                         <RequireAuth>
                             <DashboardPage />

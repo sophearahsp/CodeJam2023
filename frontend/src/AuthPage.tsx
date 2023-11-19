@@ -16,14 +16,14 @@ const AuthPage: React.FC = () => {
         supabase.auth.getSession().then(({ data: { session } }) => {
             if (session) {
                 setAuthenticated(true);
-                navigate('/dashboard'); // Redirect to /dashboard if authenticated
+                navigate('/home'); // Redirect to /dashboard if authenticated
             }
         })
 
         supabase.auth.onAuthStateChange((_event, session) => {
             if (session) {
                 setAuthenticated(true);
-                navigate('/dashboard'); // Redirect to /dashboard if authenticated
+                navigate('/home'); // Redirect to /dashboard if authenticated
             } else {
                 setAuthenticated(false);
                 navigate('/login');

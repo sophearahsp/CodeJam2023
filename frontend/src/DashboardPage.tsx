@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, MouseEvent, HTMLButtonElement } from 'react'
 import { Box, Modal, TextField, Paper, Button, Grid, Stack, Typography } from "@mui/material";
 import { supabase } from './supabaseClient'
 import Feed from './Feed';
@@ -7,10 +7,15 @@ import { useNavigate } from 'react-router-dom';
 import Profile from './Profile';
 
 function DashboardPage() {
+    const [profileView, setProfileView] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const navigate = useNavigate();
+    
+    const handleProfile = (e: MouseEvent<HTMLButtonElement>) => {
+        setProfileView(true)
+    }
 
     return (
         <Box
@@ -52,6 +57,16 @@ function DashboardPage() {
                                 >
                                     Create
                                 </Button>
+
+                                <Button
+                                    size={"large"}
+                                    style={{ width: '100%' }}
+                                    variant="outlined" color="primary"
+                                    onClick={handleProfile}
+                                >
+                                    Profile
+                                </Button>
+
                                 <Button
                                     size={"large"}
                                     style={{ width: '100%' }}
@@ -67,8 +82,7 @@ function DashboardPage() {
 
                 {/* Middle Section */}
                 <Grid item xs={6} sx={{height: '100%', overflowY: 'auto', borderLeft: 1, borderRight: 1, borderColor: '#DEE2E6'}} p={2} >
-                    {/* <Feed/> */}
-                    <Profile/>
+                    {profileView ? <Profile/> : <Feed/>}
                 </Grid>
 
                 {/* Right Section */}
