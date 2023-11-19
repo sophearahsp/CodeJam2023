@@ -66,25 +66,27 @@ const PreJoinScreen = ({ joinCall, cancelCall }: PreJoinScreenProps) => {
         >
             <Stack spacing={{lg: 2}}>
                 {/* Video preview */}
-                {localParticipant &&
-                    <DailyVideo
-                        type="video"
-                        sessionId={localParticipant.session_id}
-                        mirror
-                        style={{
-                            width: 800
-                        }}
-                    />
-                }
-                
-                <TextField
+                <Box sx={{width: 800, height: 450, backgroundColor: 'lightgray'}}>
+                    {localParticipant &&
+                        <DailyVideo
+                            type="video"
+                            sessionId={localParticipant.session_id}
+                            mirror
+                            style={{
+                                width: 800
+                            }}
+                        />
+                    }
+                </Box>
+
+                {/* <TextField
                     label="Username"
                     placeholder="Username"
                     onChange={(e) => onChange(e)}
                     value={localParticipant?.user_name || ''}
-                />
+                /> */}
                 
-                {/* <TextField label="Room" placeholder="Room"/> */}
+                <TextField label="Room" placeholder="Room"/>
 
                 <Button variant="contained" onClick={join} size="large">
                     Join

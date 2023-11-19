@@ -39,7 +39,6 @@ const MessageDialog = (props: {index: number, message: MessageData}) => {
 }
 
 const Chat = ({ showChat, toggleChat }: ChatProps) => {
-//export default function Chat({ showChat, toggleChat }) {
     const localParticipant = useLocalParticipant();
     const [messages, setMessages] = useState<MessageData[]>([]);
     const [inputValue, setInputValue] = useState('');
@@ -134,6 +133,9 @@ const Chat = ({ showChat, toggleChat }: ChatProps) => {
                 display: 'flex',
             }}
         >
+            <Typography fontSize={12}>
+                {window.location.href}
+            </Typography>
             <Stack
                 spacing={2}
                 p={1}

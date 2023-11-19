@@ -1,10 +1,9 @@
-import { useState } from 'react'
-import QuickJoinPage from './QuickJoinPage';
+import Router from './Router';
 
 function App() {
     return (
 		<>
-			<QuickJoinPage/>
+			<Router/>
 		</>
     )
 }
