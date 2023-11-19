@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import {
   useDaily,
   useScreenShare,
@@ -19,6 +19,47 @@ import {Videocam, VideocamOff, Mic, MicOff} from '@mui/icons-material';
 interface TrayProps {
 	leaveCall: () => void;
 }
+
+
+const CountdownTimer = () => {
+    const initialTime = 20 * 60; // 20 minutes in seconds
+    const [timeRemaining, setTimeRemaining] = useState(initialTime);
+  
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setTimeRemaining((prevTime) => {
+            if (prevTime === 0) {
+                clearInterval(intervalId);
+                // You can add any logic to handle when the countdown reaches zero
+                console.log('Countdown finished!');
+                return 0;
+            } else {
+                return prevTime - 1;
+            }
+            });
+        }, 1000); // Update every second
+    
+        // Cleanup the interval on component unmount
+        return () => clearInterval(intervalId);
+    }, []);
+  
+    const formatTime = (seconds: number) => {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        const formattedMinutes = String(minutes).padStart(2, '0');
+        const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+        return `${formattedMinutes}:${formattedSeconds}`;
+    };
+  
+    return (
+        <Typography sx={{ fontWeight: 'bold', color: 'black' }}>
+            Time left: {formatTime(timeRemaining)}
+        </Typography>
+    );
+};
+  
+// export default CountdownTimer;
+  
 
 const Tray = ({ leaveCall }: TrayProps) => {
     const callObject = useDaily();
@@ -84,9 +125,7 @@ const Tray = ({ leaveCall }: TrayProps) => {
                 justifyContent: 'center',
                 boxShadow: 'none',
             }}>
-                <Typography sx={{ fontWeight: 'bold', color: 'black' }}>
-                    Time left: 20:00
-                </Typography>
+                <CountdownTimer/>
             </Paper>
             <Stack direction={'row'} spacing={2}>
                 <IconButton
