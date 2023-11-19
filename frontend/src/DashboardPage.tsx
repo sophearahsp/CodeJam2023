@@ -4,6 +4,7 @@ import { supabase } from './supabaseClient'
 import Feed from './Feed';
 import CreateModal from './components/Dashboard/CreateModal';
 import { useNavigate } from 'react-router-dom';
+import Profile from './Profile';
 
 function DashboardPage() {
     const [open, setOpen] = React.useState(false);
@@ -66,7 +67,8 @@ function DashboardPage() {
 
                 {/* Middle Section */}
                 <Grid item xs={6} sx={{height: '100%', overflowY: 'auto', borderLeft: 1, borderRight: 1, borderColor: '#DEE2E6'}} p={2} >
-                    <Feed/>
+                    {/* <Feed/> */}
+                    <Profile/>
                 </Grid>
 
                 {/* Right Section */}

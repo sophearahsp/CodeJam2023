@@ -3,7 +3,7 @@ import { Box, TextField, Paper, Button, Grid, Stack, Typography } from "@mui/mat
 import FeedPost from './components/Dashboard/FeedPost';
 import { supabase } from './supabaseClient'
 
-interface Post {
+export interface Post {
     id: number;
     content: string;
     user_id: number;
@@ -45,15 +45,6 @@ const Feed = () => {
             ) : (
                 <Typography>No posts available</Typography>
             )}
-            
-            {/* <FeedPost/>
-            <FeedPost/>
-            <FeedPost/>
-            <FeedPost/>
-            <FeedPost/>
-            <FeedPost/>
-            <FeedPost/>
-            <FeedPost/> */}
         </Stack>
     )
 }
