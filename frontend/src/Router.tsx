@@ -4,6 +4,7 @@ import { Routes, Route, Navigate, useLocation, BrowserRouter } from 'react-route
 import AuthPage from './AuthPage';
 import DashboardPage from './DashboardPage';
 import { create } from 'zustand'
+import QuickJoinPage from './QuickJoinPage';
 
 interface AuthStore {
     authenticated: boolean;
@@ -34,6 +35,13 @@ const Router = () => {
                         <RequireAuth>
                             <DashboardPage />
                         </RequireAuth>
+                    }
+                />
+
+                <Route
+                    path="/quickjoin"
+                    element={
+                        <QuickJoinPage />
                     }
                 />
                 <Route path="/login" element={<AuthPage />} />
